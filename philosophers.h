@@ -6,7 +6,7 @@
 /*   By: gshim <gshim@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/08 18:45:20 by gshim             #+#    #+#             */
-/*   Updated: 2022/04/08 22:44:01 by gshim            ###   ########.fr       */
+/*   Updated: 2022/04/11 19:32:42 by gshim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ typedef struct s_personal_info
 {
 	// private data
 	int		idx;			// 몇번 철학자인지 저장
-	enum e_phil_mode mode;	// 현재 상태를 저장
+	int		mode;			// 현재 상태를 저장
 	int		groupnum;		// 어느그룹에 속했는지 저장
 	t_info	*info;
 } t_personal_info;
@@ -55,8 +55,15 @@ enum e_phil_mode {
 	FULL = 4,		// 최소 식사횟수를 만족함 => 쓰레드종료
 };
 
+//philosophers.c
+void	get_info(t_info *info, char *argv[]);
+static void	*t_function(void *data);
+void	pthread_philo_init(t_info *info, t_data *data);
+
+
+
 // personal_info.c
-enum e_phil_mode	get_mode(int idx, int groupnum);
+int		get_mode(int groupnum);
 int		get_groupnum(int idx, t_info *info);
 t_personal_info	*get_personal_data(int idx, t_info *info);
 

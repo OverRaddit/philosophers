@@ -6,18 +6,19 @@
 #    By: gshim <gshim@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/02/22 17:48:50 by gshim             #+#    #+#              #
-#    Updated: 2022/04/08 22:37:54 by gshim            ###   ########.fr        #
+#    Updated: 2022/04/11 19:34:33 by gshim            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CC = gcc
-CFLAGS = -Wall -Wextra -Werror -g -lpthread
+CFLAGS = -Wall -Wextra -Werror
 #CFLAGS = -Wall -Wextra -Werror -g -fsanitize=address
 
 NAME = philosophers
 
 SRCS_DIR = ./src
-SRCS =  personal_info.c philosophers.c
+SRCS =  src/personal_info.c src/philosophers.c src/utils.c \
+		src/thread.c
 
 OBJS = $(SRCS:.c=.o)
 
@@ -33,17 +34,18 @@ idx		= 0
 #=================================================================
 
 $(NAME) : $(OBJS)
-	$(CC) $(CFLAGS) $^ -o $@
+	$(CC) $(CFLAGS) -lpthread $^ -o $@
 
 $(SRCS_DIR)/%.o : $(SRCS_DIR)/%.c
-	$(eval idx = $(shell expr $(idx) + 1))
-	$(eval t_idx = $(shell expr $(idx) % 4 + 1))
-	$(eval chr = $(shell echo $(sp) | cut -c $(t_idx)))
-	@if [ $(idx) = 1 ]; then\
-		echo -n "☕️ ☕️ PHILOSOPHERS Loading ...\n";\
-	fi
-	@printf "\b$(chr)"
-	@$(CC) $(CFLAGS) $< -o $@
+	$(CC) $(CFLAGS) -c $< -o $@
+#	$(eval idx = $(shell expr $(idx) + 1))
+#	$(eval t_idx = $(shell expr $(idx) % 4 + 1))
+#	$(eval chr = $(shell echo $(sp) | cut -c $(t_idx)))
+#	@if [ $(idx) = 1 ]; then\
+#		echo -n "☕️ ☕️ PHILOSOPHERS Loading ...\n";\
+#	fi
+#	@printf "\b$(chr)"
+#	@$(CC) $(CFLAGS) $< -o $@
 #	@$(CC) $(CFLAGS) -c $< -o $@
 #-lpthread 랑 -c를 같이쓰면 오류
 all : $(NAME)
