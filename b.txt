@@ -1,0 +1,10 @@
+Makefile
+README.md
+a.txt
+b.txt
+mylog.md
+personal_info.c
+philosophers.c
+philosophers.h
+practice
+utils.c
