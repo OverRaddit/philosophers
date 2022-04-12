@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philosophers.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gshim <gshim@student.42seoul.kr>           +#+  +:+       +#+        */
+/*   By: gshim <gshim@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/08 18:45:20 by gshim             #+#    #+#             */
-/*   Updated: 2022/04/12 16:20:31 by gshim            ###   ########.fr       */
+/*   Updated: 2022/04/12 22:17:35 by gshim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,15 @@
 #include <limits.h>
 #include <stdbool.h>
 #include <sys/time.h>	// gettimeofday함수
+
+#define RED "\x1b[31m"
+#define GREEN "\x1b[32m"
+#define YELLOW "\x1b[33m"
+#define BLUE "\x1b[34m"
+#define MAGENTA "\x1b[35m"
+#define CYAN "\x1b[36m"
+#define RESET "\x1b[0m"
+
 
 // 전역변수로 두면 깔끔할 것 같은데...
 typedef struct s_info
@@ -37,7 +46,9 @@ typedef struct s_personal_info
 	int		idx;			// 몇번 철학자인지 저장
 	int		mode;			// 현재 상태를 저장
 	int		groupnum;		// 어느그룹에 속했는지 저장
-	t_info	*info;
+	pthread_mutex_t *l;
+	pthread_mutex_t *r;
+	t_info	*info;	// 내용물과 가르키는 것을 바꿀수 없게 만들고싶다.
 	size_t last_eat;		// 마지막에 밥먹은 시간.
 } t_personal_info;
 
@@ -45,7 +56,9 @@ typedef struct s_data
 {
 	pthread_t		phils[OPEN_MAX];		// 철학자쓰레드
 	int				phils_id[OPEN_MAX];		// 철학자쓰레드id
-	pthread_mutex_t	fork[OPEN_MAX];			// 포크뮤텍스
+	pthread_mutex_t	fork[OPEN_MAX];			// i번째 포크의 상태(fork[i] = j => i번째포크를 j가 소유함.)
+	pthread_mutex_t	group_mutex[3];			// 각 그룹별 권한 2=최고등급, 1=서브등급, 0무등급
+	bool			is_dead[OPEN_MAX];		// i번째 철학자의 상태(1=dead)
 } t_data;
 
 enum e_phil_mode {
@@ -58,6 +71,10 @@ enum e_phil_mode {
 	FULL = 4,		// 최소 식사횟수를 만족함 => 쓰레드종료
 };
 
+// 전역변수
+t_info info;
+t_data data;
+
 //philosophers.c
 void	get_info(t_info *info, char *argv[]);
 void	*t_function(void *data);
@@ -69,6 +86,7 @@ int		get_groupnum(int idx, t_info *info);
 t_personal_info	*get_personal_data(int idx, t_info *info);
 
 // thread.c
+void	thread_AA(t_personal_info *d);
 void	thread_A(t_personal_info *d);
 
 // UTIL

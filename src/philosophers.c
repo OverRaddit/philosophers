@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philosophers.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gshim <gshim@student.42seoul.kr>           +#+  +:+       +#+        */
+/*   By: gshim <gshim@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/08 18:43:14 by gshim             #+#    #+#             */
-/*   Updated: 2022/04/12 16:23:56 by gshim            ###   ########.fr       */
+/*   Updated: 2022/04/12 22:08:25 by gshim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,29 +45,29 @@ void	*t_function(void *data)
 	//printf("[%lx] currentTime : %d\n", (unsigned long)tid, time.tv_usec - d->info->start.tv_usec);
 	printf("======================\n");
 
-	thread_A(d);
+	thread_AA(d);
 	printf("thread exit\n");
 	return (0);
 }
 
 void	pthread_philo_init(t_info *info, t_data *data)
 {
-	// int i;
+	int i;
 
-	// i = 0;
-	// while(i < info->phil_num)
-	// {
-	// 	// 철학자(쓰레드) 생성
-	// 	data->phils_id[i] = pthread_create(&data->phils[i], NULL,
-	// 						 t_function, (void *)get_personal_data(i, info));
-	// 	// 포크(뮤텍스) init
-	// 	pthread_mutex_init(&(data->fork[i]), NULL);
-	// 	i++;
-	// }
+	i = 0;
+	while(i < info->phil_num)
+	{
+		// 포크(뮤텍스) 생성
+		pthread_mutex_init(&data->fork[i], NULL);
+		// 철학자(쓰레드) 생성
+		data->phils_id[i] = pthread_create(&data->phils[i], NULL,
+							 t_function, (void *)get_personal_data(i, info));
+		i++;
+	}
 
 	//[TEST] 2개의 철학자 생성.
-	data->phils_id[0] = pthread_create(&data->phils[0], NULL,
-	 						 t_function, (void *)get_personal_data(0, info));
+	// data->phils_id[0] = pthread_create(&data->phils[0], NULL,
+	//  						 t_function, (void *)get_personal_data(0, info));
 	// data->phils_id[1] = pthread_create(&data->phils[1], NULL,
 	//  						 t_function, (void *)get_personal_data(1, info));
 
@@ -90,11 +90,9 @@ void	pthread_philo_init(t_info *info, t_data *data)
 
 
 // ./philosophers 2 10 3 3
-// 철학자2, 수명10, 식사3, 수면3
+// 철학자2, 수명5, 식사3, 수면3
 int		main(int argc, char *argv[])
 {
-	t_info info;
-	t_data data;
 	//bool toggle;
 
 	if (argc < 5)
@@ -116,9 +114,22 @@ int		main(int argc, char *argv[])
 
 
 	int s = 0;
-	while (42)
+	while (1)
 	{
-		printf("%d초 경과\n", s++);
+		//printf("%d초 경과\n", s++);
 		usleep(1000 * 1000);
 	}
 }
+
+typedef struct        s_philo
+{
+   pthread_t         tid;
+    int               num;
+    int               r_fork;
+    int               l_fork;
+    int               eat_cnt;
+    struct s_rule     *rule;
+    struct s_mutex    *mutex;
+    struct timeval    start_tv;
+    struct timeval    life_tv;
+}                     t_philo;
