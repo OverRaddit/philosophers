@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   personal_info.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gshim <gshim@student.42.fr>                +#+  +:+       +#+        */
+/*   By: gshim <gshim@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/08 22:22:31 by gshim             #+#    #+#             */
-/*   Updated: 2022/04/11 19:21:48 by gshim            ###   ########.fr       */
+/*   Updated: 2022/04/12 01:22:23 by gshim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,10 +27,10 @@ int		get_groupnum(int idx, t_info *info)
 	// 마지막(철학자 수가 홀수일 때만 정의됨)
 	if (info->phil_num % 2 == 1 && idx == info->phil_num - 1)
 		return (3);
-	// 홀수
-	else if (idx % 2 == 1)
-		return (1);
 	// 짝수
+	else if (idx % 2 == 0)
+		return (1);
+	// 홀수
 	else
 		return (2);
 }

@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gshim <gshim@student.42.fr>                +#+  +:+       +#+        */
+/*   By: gshim <gshim@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/04 21:43:27 by gshim             #+#    #+#             */
-/*   Updated: 2022/04/08 22:40:06 by gshim            ###   ########.fr       */
+/*   Updated: 2022/04/12 14:21:17 by gshim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <limits.h>
 
-int	get_sign(char c)
+static int	get_sign(char c)
 {
 	if (c == '-')
 		return (-1);
@@ -20,7 +20,7 @@ int	get_sign(char c)
 		return (1);
 }
 
-int	get_ret(int sign)
+static int	get_ret(int sign)
 {
 	if (sign < 0)
 		return (0);

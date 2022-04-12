@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philosophers.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gshim <gshim@student.42.fr>                +#+  +:+       +#+        */
+/*   By: gshim <gshim@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/08 18:45:20 by gshim             #+#    #+#             */
-/*   Updated: 2022/04/11 19:32:42 by gshim            ###   ########.fr       */
+/*   Updated: 2022/04/12 16:20:31 by gshim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 #include <stdlib.h>
 #include <limits.h>
 #include <stdbool.h>
+#include <sys/time.h>	// gettimeofday함수
 
 // 전역변수로 두면 깔끔할 것 같은데...
 typedef struct s_info
@@ -26,6 +27,7 @@ typedef struct s_info
 	int	phil_eat_time;	// 식사소요시간
 	int	phil_slp_time;	// 수면시간
 	int	phil_min_eat;	// 선택사항) 최소 식사횟수
+	size_t start;		// timestamp용 시간변수
 } t_info;
 
 // 각 쓰레드에게 넘겨줘야 할 인자 값!
@@ -36,6 +38,7 @@ typedef struct s_personal_info
 	int		mode;			// 현재 상태를 저장
 	int		groupnum;		// 어느그룹에 속했는지 저장
 	t_info	*info;
+	size_t last_eat;		// 마지막에 밥먹은 시간.
 } t_personal_info;
 
 typedef struct s_data
@@ -57,15 +60,18 @@ enum e_phil_mode {
 
 //philosophers.c
 void	get_info(t_info *info, char *argv[]);
-static void	*t_function(void *data);
+void	*t_function(void *data);
 void	pthread_philo_init(t_info *info, t_data *data);
-
-
 
 // personal_info.c
 int		get_mode(int groupnum);
 int		get_groupnum(int idx, t_info *info);
 t_personal_info	*get_personal_data(int idx, t_info *info);
 
+// thread.c
+void	thread_A(t_personal_info *d);
+
 // UTIL
 int	ft_atoi(const char *str);
+size_t	get_time();
+size_t	relative_time(size_t start);

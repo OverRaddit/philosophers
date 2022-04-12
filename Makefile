@@ -3,22 +3,23 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: gshim <gshim@student.42.fr>                +#+  +:+       +#+         #
+#    By: gshim <gshim@student.42seoul.kr>           +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/02/22 17:48:50 by gshim             #+#    #+#              #
-#    Updated: 2022/04/11 19:34:33 by gshim            ###   ########.fr        #
+#    Updated: 2022/04/12 14:59:36 by gshim            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CC = gcc
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS =
+#CFLAGS = -Wall -Wextra -Werror
 #CFLAGS = -Wall -Wextra -Werror -g -fsanitize=address
 
 NAME = philosophers
 
 SRCS_DIR = ./src
-SRCS =  src/personal_info.c src/philosophers.c src/utils.c \
-		src/thread.c
+SRCS =  src/personal_info.c src/philosophers.c src/thread.c \
+		src/utils.c src/utils2.c
 
 OBJS = $(SRCS:.c=.o)
 
