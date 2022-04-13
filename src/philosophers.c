@@ -6,7 +6,7 @@
 /*   By: gshim <gshim@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/08 18:43:14 by gshim             #+#    #+#             */
-/*   Updated: 2022/04/12 22:08:25 by gshim            ###   ########.fr       */
+/*   Updated: 2022/04/13 18:12:24 by gshim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,8 @@ void	get_info(t_info *info, char *argv[])
 	info->phil_slp_time = ft_atoi(argv[4]);
 	if (argv[5] != NULL)
 		info->phil_min_eat = ft_atoi(argv[5]);
+	else
+		info->phil_min_eat = -1;
 	//gettimeofday(&(info->start), NULL);
 	info->start = get_time();
 }
@@ -40,10 +42,10 @@ void	*t_function(void *data)
 
 	t_personal_info *d = (t_personal_info *)data;
 	gettimeofday(&time, NULL);
-	printf("======================\n");
-	printf("[%lx] idx: %d, groupnum: %d, philsnum: %d\n", (unsigned long)tid, d->idx, d->groupnum, d->info->phil_num);
-	//printf("[%lx] currentTime : %d\n", (unsigned long)tid, time.tv_usec - d->info->start.tv_usec);
-	printf("======================\n");
+	// printf("======================\n");
+	// printf("[%lx] idx: %d, groupnum: %d, philsnum: %d\n", (unsigned long)tid, d->idx, d->groupnum, d->info->phil_num);
+	// //printf("[%lx] currentTime : %d\n", (unsigned long)tid, time.tv_usec - d->info->start.tv_usec);
+	// printf("======================\n");
 
 	thread_AA(d);
 	printf("thread exit\n");
@@ -54,14 +56,16 @@ void	pthread_philo_init(t_info *info, t_data *data)
 {
 	int i;
 
+	//data->nextgroup = 1;
 	i = 0;
 	while(i < info->phil_num)
 	{
 		// 포크(뮤텍스) 생성
 		pthread_mutex_init(&data->fork[i], NULL);
 		// 철학자(쓰레드) 생성
+		data->phils_info[i] = get_personal_data(i, info);
 		data->phils_id[i] = pthread_create(&data->phils[i], NULL,
-							 t_function, (void *)get_personal_data(i, info));
+							 t_function, (void *)(data->phils_info[i]));
 		i++;
 	}
 
@@ -106,19 +110,20 @@ int		main(int argc, char *argv[])
 	pthread_philo_init(&info, &data);
 	printf("[DEBUG]INIT COMPLETE\n");
 
+	// 모니터링쓰레드 생성
+	pthread_t monitor_thread;
+	pthread_create(&monitor_thread, NULL, monitoring, (void *)"monitoring");
+
 	// 특정철학자(스레드)가 죽었거나, 모든 철학자(스레드)가 최소 식사횟수를 만족했다면
 	// 종료한다.
 
 	pthread_detach(data.phils[0]);
 	pthread_detach(data.phils[1]);
 
-
 	int s = 0;
-	while (1)
-	{
-		//printf("%d초 경과\n", s++);
-		usleep(1000 * 1000);
-	}
+	pthread_join(monitor_thread, NULL);
+	printf("EXIT DETECTED!!\n");
+	return (0);
 }
 
 typedef struct        s_philo

@@ -1,6 +1,7 @@
 {
 	"files.associations": {
 		"pthread.h": "c",
-		"__locale": "c"
+		"__locale": "c",
+		"__threading_support": "c"
 	}
 }

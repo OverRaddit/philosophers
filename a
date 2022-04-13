@@ -1,0 +1,300 @@
+[DEBUG]Get ARGV INFO..
+[DEBUG]INIT PHILO..
+[34m0.112000_in_ms 0 has taken a fork[0m
+[34m0.125000_in_ms 8 has taken a fork[0m
+[34m0.137000_in_ms 10 has taken a fork[0m
+[34m0.150000_in_ms 10 has taken a fork[0m
+[33m0.152000_in_ms 10 eating[0m
+[34m0.123000_in_ms 6 has taken a fork[0m
+[34m0.158000_in_ms 6 has taken a fork[0m
+[34m0.159000_in_ms 12 has taken a fork[0m
+[34m0.163000_in_ms 12 has taken a fork[0m
+[33m0.163000_in_ms 12 eating[0m
+[34m0.138000_in_ms 8 has taken a fork[0m
+[33m0.189000_in_ms 8 eating[0m
+[34m0.121000_in_ms 4 has taken a fork[0m
+[34m0.192000_in_ms 4 has taken a fork[0m
+[33m0.192000_in_ms 4 eating[0m
+[34m0.113000_in_ms 2 has taken a fork[0m
+[34m0.216000_in_ms 2 has taken a fork[0m
+[33m0.218000_in_ms 2 eating[0m
+[34m0.127000_in_ms 0 has taken a fork[0m
+[33m0.225000_in_ms 0 eating[0m
+[34m0.214000_in_ms 14 has taken a fork[0m
+[34m0.230000_in_ms 14 has taken a fork[0m
+[33m0.232000_in_ms 14 eating[0m
+[34m0.233000_in_ms 18 has taken a fork[0m
+[34m0.221000_in_ms 16 has taken a fork[0m
+[34m0.250000_in_ms 16 has taken a fork[0m
+[33m0.252000_in_ms 16 eating[0m
+[33m0.159000_in_ms 6 eating[0m
+[34m0.234000_in_ms 18 has taken a fork[0m
+[34m0.246000_in_ms 20 has taken a fork[0m
+[34m0.264000_in_ms 20 has taken a fork[0m
+[33m0.286000_in_ms 20 eating[0m
+[33m0.261000_in_ms 18 eating[0m
+[34m0.290000_in_ms 22 has taken a fork[0m
+[34m0.312000_in_ms 22 has taken a fork[0m
+[33m0.312000_in_ms 22 eating[0m
+[34m0.322000_in_ms 24 has taken a fork[0m
+[34m0.337000_in_ms 24 has taken a fork[0m
+[33m0.338000_in_ms 24 eating[0m
+[34m0.347000_in_ms 26 has taken a fork[0m
+[34m0.347000_in_ms 26 has taken a fork[0m
+[33m0.348000_in_ms 26 eating[0m
+[34m0.356000_in_ms 28 has taken a fork[0m
+[34m0.357000_in_ms 28 has taken a fork[0m
+[33m0.357000_in_ms 28 eating[0m
+[34m0.394000_in_ms 30 has taken a fork[0m
+[34m0.397000_in_ms 30 has taken a fork[0m
+[33m0.397000_in_ms 30 eating[0m
+[34m0.403000_in_ms 32 has taken a fork[0m
+[34m0.404000_in_ms 32 has taken a fork[0m
+[33m0.406000_in_ms 32 eating[0m
+[34m0.414000_in_ms 34 has taken a fork[0m
+[34m0.416000_in_ms 34 has taken a fork[0m
+[33m0.416000_in_ms 34 eating[0m
+[34m0.447000_in_ms 36 has taken a fork[0m
+[34m0.447000_in_ms 36 has taken a fork[0m
+[33m0.448000_in_ms 36 eating[0m
+[34m0.501000_in_ms 38 has taken a fork[0m
+[34m0.501000_in_ms 38 has taken a fork[0m
+[33m0.502000_in_ms 38 eating[0m
+[34m0.508000_in_ms 40 has taken a fork[0m
+[34m0.510000_in_ms 40 has taken a fork[0m
+[33m0.511000_in_ms 40 eating[0m
+[34m0.520000_in_ms 42 has taken a fork[0m
+[34m0.521000_in_ms 42 has taken a fork[0m
+[33m0.521000_in_ms 42 eating[0m
+[34m0.530000_in_ms 44 has taken a fork[0m
+[34m0.530000_in_ms 44 has taken a fork[0m
+[33m0.531000_in_ms 44 eating[0m
+[34m0.581000_in_ms 46 has taken a fork[0m
+[34m0.584000_in_ms 46 has taken a fork[0m
+[33m0.584000_in_ms 46 eating[0m
+[34m0.593000_in_ms 48 has taken a fork[0m
+[34m0.594000_in_ms 48 has taken a fork[0m
+[33m0.594000_in_ms 48 eating[0m
+[34m0.603000_in_ms 50 has taken a fork[0m
+[34m0.603000_in_ms 50 has taken a fork[0m
+[33m0.604000_in_ms 50 eating[0m
+[34m0.609000_in_ms 52 has taken a fork[0m
+[34m0.609000_in_ms 52 has taken a fork[0m
+[33m0.610000_in_ms 52 eating[0m
+[34m0.635000_in_ms 54 has taken a fork[0m
+[34m0.635000_in_ms 54 has taken a fork[0m
+[33m0.636000_in_ms 54 eating[0m
+[34m0.663000_in_ms 56 has taken a fork[0m
+[34m0.663000_in_ms 56 has taken a fork[0m
+[33m0.664000_in_ms 56 eating[0m
+[34m0.675000_in_ms 58 has taken a fork[0m
+[34m0.676000_in_ms 58 has taken a fork[0m
+[33m0.676000_in_ms 58 eating[0m
+[34m0.692000_in_ms 60 has taken a fork[0m
+[34m0.694000_in_ms 60 has taken a fork[0m
+[33m0.695000_in_ms 60 eating[0m
+[34m0.700000_in_ms 62 has taken a fork[0m
+[34m0.701000_in_ms 62 has taken a fork[0m
+[33m0.701000_in_ms 62 eating[0m
+[34m0.717000_in_ms 64 has taken a fork[0m
+[34m0.718000_in_ms 64 has taken a fork[0m
+[33m0.718000_in_ms 64 eating[0m
+[34m0.728000_in_ms 66 has taken a fork[0m
+[34m0.757000_in_ms 68 has taken a fork[0m
+[34m0.764000_in_ms 68 has taken a fork[0m
+[33m0.780000_in_ms 68 eating[0m
+[34m0.782000_in_ms 70 has taken a fork[0m
+[34m0.783000_in_ms 70 has taken a fork[0m
+[33m0.783000_in_ms 70 eating[0m
+[34m0.757000_in_ms 66 has taken a fork[0m
+[33m0.786000_in_ms 66 eating[0m
+[34m0.816000_in_ms 72 has taken a fork[0m
+[34m0.819000_in_ms 72 has taken a fork[0m
+[33m0.819000_in_ms 72 eating[0m
+[34m0.844000_in_ms 74 has taken a fork[0m
+[34m0.846000_in_ms 74 has taken a fork[0m
+[33m0.846000_in_ms 74 eating[0m
+[34m0.856000_in_ms 76 has taken a fork[0m
+[34m0.857000_in_ms 76 has taken a fork[0m
+[33m0.857000_in_ms 76 eating[0m
+[34m0.867000_in_ms 78 has taken a fork[0m
+[34m0.868000_in_ms 78 has taken a fork[0m
+[33m0.868000_in_ms 78 eating[0m
+[34m0.881000_in_ms 80 has taken a fork[0m
+[34m0.882000_in_ms 80 has taken a fork[0m
+[33m0.882000_in_ms 80 eating[0m
+[34m0.897000_in_ms 82 has taken a fork[0m
+[34m0.898000_in_ms 82 has taken a fork[0m
+[33m0.898000_in_ms 82 eating[0m
+[34m0.907000_in_ms 84 has taken a fork[0m
+[34m0.907000_in_ms 84 has taken a fork[0m
+[33m0.907000_in_ms 84 eating[0m
+[34m0.919000_in_ms 86 has taken a fork[0m
+[34m0.919000_in_ms 86 has taken a fork[0m
+[33m0.920000_in_ms 86 eating[0m
+[34m0.939000_in_ms 88 has taken a fork[0m
+[34m0.940000_in_ms 88 has taken a fork[0m
+[33m0.940000_in_ms 88 eating[0m
+[34m0.948000_in_ms 90 has taken a fork[0m
+[34m0.948000_in_ms 90 has taken a fork[0m
+[33m0.949000_in_ms 90 eating[0m
+[34m0.956000_in_ms 92 has taken a fork[0m
+[34m0.957000_in_ms 92 has taken a fork[0m
+[33m0.957000_in_ms 92 eating[0m
+[34m0.968000_in_ms 94 has taken a fork[0m
+[34m0.968000_in_ms 94 has taken a fork[0m
+[33m0.969000_in_ms 94 eating[0m
+[34m0.988000_in_ms 96 has taken a fork[0m
+[34m0.990000_in_ms 96 has taken a fork[0m
+[33m0.990000_in_ms 96 eating[0m
+[34m0.995000_in_ms 98 has taken a fork[0m
+[34m0.996000_in_ms 98 has taken a fork[0m
+[33m0.996000_in_ms 98 eating[0m
+[34m1.008000_in_ms 100 has taken a fork[0m
+[34m1.009000_in_ms 100 has taken a fork[0m
+[33m1.009000_in_ms 100 eating[0m
+[34m1.020000_in_ms 102 has taken a fork[0m
+[34m1.021000_in_ms 102 has taken a fork[0m
+[33m1.021000_in_ms 102 eating[0m
+[34m1.035000_in_ms 104 has taken a fork[0m
+[34m1.035000_in_ms 104 has taken a fork[0m
+[33m1.035000_in_ms 104 eating[0m
+[34m1.051000_in_ms 106 has taken a fork[0m
+[34m1.052000_in_ms 106 has taken a fork[0m
+[33m1.052000_in_ms 106 eating[0m
+[34m1.060000_in_ms 108 has taken a fork[0m
+[34m1.060000_in_ms 108 has taken a fork[0m
+[33m1.061000_in_ms 108 eating[0m
+[34m1.085000_in_ms 110 has taken a fork[0m
+[34m1.085000_in_ms 110 has taken a fork[0m
+[33m1.086000_in_ms 110 eating[0m
+[34m1.117000_in_ms 112 has taken a fork[0m
+[34m1.118000_in_ms 112 has taken a fork[0m
+[33m1.118000_in_ms 112 eating[0m
+[34m1.131000_in_ms 114 has taken a fork[0m
+[34m1.132000_in_ms 114 has taken a fork[0m
+[33m1.133000_in_ms 114 eating[0m
+[34m1.144000_in_ms 116 has taken a fork[0m
+[34m1.145000_in_ms 116 has taken a fork[0m
+[33m1.145000_in_ms 116 eating[0m
+[34m1.175000_in_ms 118 has taken a fork[0m
+[34m1.177000_in_ms 118 has taken a fork[0m
+[33m1.178000_in_ms 118 eating[0m
+[34m1.183000_in_ms 120 has taken a fork[0m
+[34m1.183000_in_ms 120 has taken a fork[0m
+[33m1.184000_in_ms 120 eating[0m
+[34m1.215000_in_ms 122 has taken a fork[0m
+[34m1.217000_in_ms 122 has taken a fork[0m
+[33m1.217000_in_ms 122 eating[0m
+[34m1.220000_in_ms 124 has taken a fork[0m
+[34m1.221000_in_ms 124 has taken a fork[0m
+[33m1.240000_in_ms 124 eating[0m
+[34m1.266000_in_ms 126 has taken a fork[0m
+[34m1.267000_in_ms 126 has taken a fork[0m
+[33m1.267000_in_ms 126 eating[0m
+[34m1.293000_in_ms 128 has taken a fork[0m
+[34m1.307000_in_ms 128 has taken a fork[0m
+[33m1.307000_in_ms 128 eating[0m
+[34m1.338000_in_ms 130 has taken a fork[0m
+[34m1.339000_in_ms 130 has taken a fork[0m
+[33m1.339000_in_ms 130 eating[0m
+[34m1.366000_in_ms 132 has taken a fork[0m
+[34m1.367000_in_ms 132 has taken a fork[0m
+[33m1.387000_in_ms 132 eating[0m
+[34m1.395000_in_ms 134 has taken a fork[0m
+[34m1.397000_in_ms 134 has taken a fork[0m
+[33m1.397000_in_ms 134 eating[0m
+[34m1.409000_in_ms 136 has taken a fork[0m
+[34m1.410000_in_ms 136 has taken a fork[0m
+[33m1.410000_in_ms 136 eating[0m
+[34m1.423000_in_ms 138 has taken a fork[0m
+[34m1.424000_in_ms 138 has taken a fork[0m
+[33m1.424000_in_ms 138 eating[0m
+[34m1.457000_in_ms 140 has taken a fork[0m
+[34m1.458000_in_ms 140 has taken a fork[0m
+[33m1.458000_in_ms 140 eating[0m
+[34m1.480000_in_ms 142 has taken a fork[0m
+[34m1.481000_in_ms 142 has taken a fork[0m
+[33m1.481000_in_ms 142 eating[0m
+[34m1.485000_in_ms 144 has taken a fork[0m
+[34m1.486000_in_ms 144 has taken a fork[0m
+[33m1.486000_in_ms 144 eating[0m
+[34m1.500000_in_ms 146 has taken a fork[0m
+[34m1.500000_in_ms 146 has taken a fork[0m
+[33m1.501000_in_ms 146 eating[0m
+[34m1.542000_in_ms 148 has taken a fork[0m
+[34m1.543000_in_ms 148 has taken a fork[0m
+[33m1.543000_in_ms 148 eating[0m
+[34m1.569000_in_ms 150 has taken a fork[0m
+[34m1.570000_in_ms 150 has taken a fork[0m
+[33m1.570000_in_ms 150 eating[0m
+[34m1.581000_in_ms 152 has taken a fork[0m
+[34m1.582000_in_ms 152 has taken a fork[0m
+[33m1.582000_in_ms 152 eating[0m
+[34m1.596000_in_ms 154 has taken a fork[0m
+[34m1.596000_in_ms 154 has taken a fork[0m
+[33m1.597000_in_ms 154 eating[0m
+[34m1.608000_in_ms 156 has taken a fork[0m
+[34m1.609000_in_ms 156 has taken a fork[0m
+[33m1.609000_in_ms 156 eating[0m
+[34m1.622000_in_ms 158 has taken a fork[0m
+[34m1.623000_in_ms 158 has taken a fork[0m
+[33m1.623000_in_ms 158 eating[0m
+[34m1.636000_in_ms 160 has taken a fork[0m
+[34m1.636000_in_ms 160 has taken a fork[0m
+[33m1.636000_in_ms 160 eating[0m
+[34m1.649000_in_ms 162 has taken a fork[0m
+[34m1.650000_in_ms 162 has taken a fork[0m
+[33m1.650000_in_ms 162 eating[0m
+[34m1.663000_in_ms 164 has taken a fork[0m
+[34m1.664000_in_ms 164 has taken a fork[0m
+[33m1.664000_in_ms 164 eating[0m
+[34m1.674000_in_ms 166 has taken a fork[0m
+[34m1.675000_in_ms 166 has taken a fork[0m
+[33m1.675000_in_ms 166 eating[0m
+[34m1.688000_in_ms 168 has taken a fork[0m
+[34m1.689000_in_ms 168 has taken a fork[0m
+[33m1.689000_in_ms 168 eating[0m
+[34m1.702000_in_ms 170 has taken a fork[0m
+[34m1.703000_in_ms 170 has taken a fork[0m
+[33m1.703000_in_ms 170 eating[0m
+[34m1.715000_in_ms 172 has taken a fork[0m
+[34m1.716000_in_ms 172 has taken a fork[0m
+[33m1.716000_in_ms 172 eating[0m
+[34m1.729000_in_ms 174 has taken a fork[0m
+[34m1.729000_in_ms 174 has taken a fork[0m
+[33m1.730000_in_ms 174 eating[0m
+[34m1.740000_in_ms 176 has taken a fork[0m
+[34m1.741000_in_ms 176 has taken a fork[0m
+[33m1.741000_in_ms 176 eating[0m
+[34m1.752000_in_ms 178 has taken a fork[0m
+[34m1.753000_in_ms 178 has taken a fork[0m
+[33m1.753000_in_ms 178 eating[0m
+[34m1.766000_in_ms 180 has taken a fork[0m
+[34m1.766000_in_ms 180 has taken a fork[0m
+[33m1.767000_in_ms 180 eating[0m
+[34m1.779000_in_ms 182 has taken a fork[0m
+[34m1.781000_in_ms 182 has taken a fork[0m
+[33m1.782000_in_ms 182 eating[0m
+[34m1.793000_in_ms 184 has taken a fork[0m
+[34m1.793000_in_ms 184 has taken a fork[0m
+[33m1.794000_in_ms 184 eating[0m
+[34m1.806000_in_ms 186 has taken a fork[0m
+[34m1.807000_in_ms 186 has taken a fork[0m
+[33m1.807000_in_ms 186 eating[0m
+[34m1.818000_in_ms 188 has taken a fork[0m
+[34m1.818000_in_ms 188 has taken a fork[0m
+[33m1.819000_in_ms 188 eating[0m
+[34m1.834000_in_ms 190 has taken a fork[0m
+[34m1.834000_in_ms 190 has taken a fork[0m
+[33m1.835000_in_ms 190 eating[0m
+[34m1.846000_in_ms 192 has taken a fork[0m
+[34m1.847000_in_ms 192 has taken a fork[0m
+[33m1.847000_in_ms 192 eating[0m
+[34m1.862000_in_ms 194 has taken a fork[0m
+[34m1.863000_in_ms 194 has taken a fork[0m
+[33m1.863000_in_ms 194 eating[0m
+[34m1.876000_in_ms 196 has taken a fork[0m
+[34m1.877000_in_ms 196 has taken a fork[0m
+[33m1.877000_in_ms 196 eating[0m
+[34m1.890000_in_ms 198 has taken a

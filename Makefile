@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: gshim <gshim@student.42seoul.kr>           +#+  +:+       +#+         #
+#    By: gshim <gshim@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/02/22 17:48:50 by gshim             #+#    #+#              #
-#    Updated: 2022/04/12 14:59:36 by gshim            ###   ########.fr        #
+#    Updated: 2022/04/13 16:34:28 by gshim            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,7 +19,7 @@ NAME = philosophers
 
 SRCS_DIR = ./src
 SRCS =  src/personal_info.c src/philosophers.c src/thread.c \
-		src/utils.c src/utils2.c
+		src/utils.c src/utils2.c src/monitor.c
 
 OBJS = $(SRCS:.c=.o)
 

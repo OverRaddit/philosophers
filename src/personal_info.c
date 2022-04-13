@@ -6,7 +6,7 @@
 /*   By: gshim <gshim@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/08 22:22:31 by gshim             #+#    #+#             */
-/*   Updated: 2022/04/12 22:00:23 by gshim            ###   ########.fr       */
+/*   Updated: 2022/04/13 17:43:03 by gshim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,5 +45,6 @@ t_personal_info	*get_personal_data(int idx, t_info *info)
 	ret->mode = get_mode(ret->groupnum);
 	ret->info = info;
 	ret->last_eat = get_time();
+	ret->eat_count = 0;
 	return (ret);
 }

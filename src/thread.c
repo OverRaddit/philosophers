@@ -6,7 +6,7 @@
 /*   By: gshim <gshim@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/11 19:34:21 by gshim             #+#    #+#             */
-/*   Updated: 2022/04/12 22:36:41 by gshim            ###   ########.fr       */
+/*   Updated: 2022/04/13 17:49:30 by gshim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,7 @@ void thread_eat(t_personal_info *d)
 
 	// 다 먹고나서부터 다시 시간측정.
 	d->last_eat = get_time();
+	d->eat_count += 1;
 }
 
 void thread_sleep(t_personal_info *d)
@@ -100,13 +101,6 @@ void thread_A(t_personal_info *d)
 	return ;
 }
 
-bool	thread_survive(t_personal_info *d)
-{
-	// 마지막 식사시간~현재까지 시간차 < 수명 이라면 생존.
-	//printf("수명체크 : %f , %f\n", (float)relative_time(d->last_eat)/1000, (float)(d->info->phil_life));
-	return ((float)relative_time(d->last_eat)/1000 < (float)(d->info->phil_life));
-}
-
 // 죽는걸 어디서 검사해야 하지..?
 void thread_AA(t_personal_info *d)
 {
@@ -116,12 +110,7 @@ void thread_AA(t_personal_info *d)
 	// 현재 쓰레드의 그룹 권한으로 먹을 수 있다면
 	while(1)
 	{
-		// 생존체크.
-		if (!thread_survive(d))
-		{
-			printf(RED "%f_in_ms %d died" RESET "\n", (float)relative_time(d->info->start)/1000, d->idx);
-			return ;
-		}
+		// 생존체크는 모니터링쓰레드에서 하도록 한다.
 
 		if (d->groupnum)
 		{

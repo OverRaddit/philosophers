@@ -6,7 +6,7 @@
 /*   By: gshim <gshim@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/08 18:45:20 by gshim             #+#    #+#             */
-/*   Updated: 2022/04/12 22:17:35 by gshim            ###   ########.fr       */
+/*   Updated: 2022/04/13 18:11:40 by gshim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,15 +50,18 @@ typedef struct s_personal_info
 	pthread_mutex_t *r;
 	t_info	*info;	// 내용물과 가르키는 것을 바꿀수 없게 만들고싶다.
 	size_t last_eat;		// 마지막에 밥먹은 시간.
+	int		eat_count;		// 밥을 먹은 횟수. 먹을때마다 증가시키기.
 } t_personal_info;
 
 typedef struct s_data
 {
 	pthread_t		phils[OPEN_MAX];		// 철학자쓰레드
 	int				phils_id[OPEN_MAX];		// 철학자쓰레드id
+	t_personal_info	*phils_info[OPEN_MAX];	// 각 철학자의 data
 	pthread_mutex_t	fork[OPEN_MAX];			// i번째 포크의 상태(fork[i] = j => i번째포크를 j가 소유함.)
 	pthread_mutex_t	group_mutex[3];			// 각 그룹별 권한 2=최고등급, 1=서브등급, 0무등급
 	bool			is_dead[OPEN_MAX];		// i번째 철학자의 상태(1=dead)
+	int				nextgroup;				// 다음식사할 그룹번호
 } t_data;
 
 enum e_phil_mode {
@@ -88,6 +91,11 @@ t_personal_info	*get_personal_data(int idx, t_info *info);
 // thread.c
 void	thread_AA(t_personal_info *d);
 void	thread_A(t_personal_info *d);
+
+// monitor.c
+bool	thread_survive(t_personal_info *d);
+bool	thread_done(t_personal_info *d);
+void	*monitoring(void *data);
 
 // UTIL
 int	ft_atoi(const char *str);
