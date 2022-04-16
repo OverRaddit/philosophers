@@ -6,7 +6,7 @@
 /*   By: gshim <gshim@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/08 18:45:20 by gshim             #+#    #+#             */
-/*   Updated: 2022/04/13 18:11:40 by gshim            ###   ########.fr       */
+/*   Updated: 2022/04/13 18:45:41 by gshim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,9 @@ typedef struct s_data
 	pthread_mutex_t	group_mutex[3];			// 각 그룹별 권한 2=최고등급, 1=서브등급, 0무등급
 	bool			is_dead[OPEN_MAX];		// i번째 철학자의 상태(1=dead)
 	int				nextgroup;				// 다음식사할 그룹번호
+	int				a_count;
+	int				b_count;
+	int				c_count;
 } t_data;
 
 enum e_phil_mode {
@@ -96,6 +99,9 @@ void	thread_A(t_personal_info *d);
 bool	thread_survive(t_personal_info *d);
 bool	thread_done(t_personal_info *d);
 void	*monitoring(void *data);
+
+// supervisor.c
+void	*supervising(void *dd);
 
 // UTIL
 int	ft_atoi(const char *str);

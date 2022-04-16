@@ -6,7 +6,7 @@
 /*   By: gshim <gshim@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/11 19:34:21 by gshim             #+#    #+#             */
-/*   Updated: 2022/04/13 17:49:30 by gshim            ###   ########.fr       */
+/*   Updated: 2022/04/13 22:27:50 by gshim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,23 +31,33 @@ int	get_thread_phase(t_personal_info *th)
 
 void thread_pick(t_personal_info *d)
 {
+	size_t time;
+
 	pthread_mutex_lock(&(data.fork[d->idx % d->info->phil_num]));
+	time = relative_time(d->info->start)/1000;
+	usleep(100);
 	d->l = &(data.fork[d->idx % d->info->phil_num]);
-	printf(BLUE "%f_in_ms %d has taken a fork" RESET "\n", (float)relative_time(d->info->start)/1000, d->idx);
+	printf(BLUE "%zu_in_ms %d has taken a fork" RESET "\n", time, d->idx);
 
 	pthread_mutex_lock(&(data.fork[(d->idx + 1) % d->info->phil_num]));
+	time = relative_time(d->info->start)/1000;
+	usleep(100);
 	d->r = &(data.fork[(d->idx + 1) % d->info->phil_num]);
-	printf(BLUE "%f_in_ms %d has taken a fork" RESET "\n", (float)relative_time(d->info->start)/1000, d->idx);
+	printf(BLUE "%zu_in_ms %d has taken a fork" RESET "\n", time, d->idx);
 }
 
 void thread_eat(t_personal_info *d)
 {
+	size_t time;
+
 	// 포크 2개를 집는다.
 	thread_pick(d);
 	// ===============critical section ======================
 
 		// 먹는다.
-		printf(YELLOW "%f_in_ms %d eating" RESET "\n", (float)relative_time(d->info->start)/1000, d->idx);
+		time = relative_time(d->info->start)/1000;
+		usleep(100);
+		printf(YELLOW "%zu_in_ms %d eating" RESET "\n", time, d->idx);
 		usleep(d->info->phil_eat_time * 1000 * 1000);
 
 		// 포크를 놓는다.
@@ -66,13 +76,21 @@ void thread_eat(t_personal_info *d)
 
 void thread_sleep(t_personal_info *d)
 {
-	printf(GREEN "%f_in_ms %d sleeping" RESET "\n", (float)relative_time(d->info->start)/1000, d->idx);
+	size_t time;
+
+	time = relative_time(d->info->start)/1000;
+	usleep(100);
+	printf(GREEN "%zu_in_ms %d sleeping" RESET "\n", time, d->idx);
 	usleep(d->info->phil_slp_time * 1000 * 1000);
 }
 
 void thread_think(t_personal_info *d)
 {
-	printf(MAGENTA "%f_in_ms %d thinking" RESET "\n", (float)relative_time(d->info->start)/1000, d->idx);
+	size_t time;
+
+	time = relative_time(d->info->start)/1000;
+	usleep(100);
+	printf(MAGENTA "%zu_in_ms %d thinking" RESET "\n", time, d->idx);
 	// while(1)
 	// {
 	// 	// 쓰레드의 그룹이 식사할 권한을 얻는다면 break.

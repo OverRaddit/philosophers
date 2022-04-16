@@ -6,7 +6,7 @@
 /*   By: gshim <gshim@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/08 18:43:14 by gshim             #+#    #+#             */
-/*   Updated: 2022/04/13 18:12:24 by gshim            ###   ########.fr       */
+/*   Updated: 2022/04/13 18:45:01 by gshim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,10 @@ void	pthread_philo_init(t_info *info, t_data *data)
 {
 	int i;
 
-	//data->nextgroup = 1;
+	data->nextgroup = 1;
+	data->a_count = 0;
+	data->b_count = 0;
+	data->c_count = 0;
 	i = 0;
 	while(i < info->phil_num)
 	{
@@ -113,6 +116,9 @@ int		main(int argc, char *argv[])
 	// 모니터링쓰레드 생성
 	pthread_t monitor_thread;
 	pthread_create(&monitor_thread, NULL, monitoring, (void *)"monitoring");
+
+	pthread_t supervisor_thread;
+	pthread_create(&supervisor_thread, NULL, supervising, (void *)"supervising");
 
 	// 특정철학자(스레드)가 죽었거나, 모든 철학자(스레드)가 최소 식사횟수를 만족했다면
 	// 종료한다.

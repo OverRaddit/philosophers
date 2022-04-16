@@ -6,7 +6,7 @@
 /*   By: gshim <gshim@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/13 16:21:45 by gshim             #+#    #+#             */
-/*   Updated: 2022/04/13 17:58:22 by gshim            ###   ########.fr       */
+/*   Updated: 2022/04/13 22:37:12 by gshim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,9 @@ void	*monitoring(void *dd)
 		{
 			if (!thread_survive(data.phils_info[i]))	// i번째 쓰레드가 죽었다면,
 			{
-				printf(RED "%f_in_ms %d died" RESET "\n", (float)relative_time(data.phils_info[i]->info->start)/1000, i);
+				size_t ttime = relative_time(data.phils_info[i]->info->start)/1000;
+				usleep(100);
+				printf(RED "%zu_in_ms %d died" RESET "\n", ttime, i);
 				return 0;
 			}
 			if (info.phil_min_eat != -1 && thread_done(data.phils_info[i])) // 식사횟수를 만족했다면
