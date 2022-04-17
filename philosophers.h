@@ -6,7 +6,7 @@
 /*   By: gshim <gshim@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/08 18:45:20 by gshim             #+#    #+#             */
-/*   Updated: 2022/04/13 18:45:41 by gshim            ###   ########.fr       */
+/*   Updated: 2022/04/17 16:55:11 by gshim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,7 @@ typedef struct s_data
 	t_personal_info	*phils_info[OPEN_MAX];	// 각 철학자의 data
 	pthread_mutex_t	fork[OPEN_MAX];			// i번째 포크의 상태(fork[i] = j => i번째포크를 j가 소유함.)
 	pthread_mutex_t	group_mutex[3];			// 각 그룹별 권한 2=최고등급, 1=서브등급, 0무등급
+	pthread_mutex_t	printer;				// 출력권한 뮤텍스
 	bool			is_dead[OPEN_MAX];		// i번째 철학자의 상태(1=dead)
 	int				nextgroup;				// 다음식사할 그룹번호
 	int				a_count;

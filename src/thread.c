@@ -6,7 +6,7 @@
 /*   By: gshim <gshim@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/11 19:34:21 by gshim             #+#    #+#             */
-/*   Updated: 2022/04/13 22:27:50 by gshim            ###   ########.fr       */
+/*   Updated: 2022/04/17 21:14:36 by gshim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,19 +31,32 @@ int	get_thread_phase(t_personal_info *th)
 
 void thread_pick(t_personal_info *d)
 {
-	size_t time;
+	size_t	time;
+	int		first;
+	int		second;
 
-	pthread_mutex_lock(&(data.fork[d->idx % d->info->phil_num]));
-	time = relative_time(d->info->start)/1000;
-	usleep(100);
-	d->l = &(data.fork[d->idx % d->info->phil_num]);
-	printf(BLUE "%zu_in_ms %d has taken a fork" RESET "\n", time, d->idx);
+	// 짝수(i)는 오른쪽(i)부터, 홀수(i)는 왼쪽(i+1)부터 잡는다.
+	// 짝수면 first가 i가되고 홀수면 first가 i+1이됨.
+	first = d->idx + (d->idx % 2 != 0);
+	second = d->idx + (d->idx % 2 == 0);
 
-	pthread_mutex_lock(&(data.fork[(d->idx + 1) % d->info->phil_num]));
-	time = relative_time(d->info->start)/1000;
-	usleep(100);
-	d->r = &(data.fork[(d->idx + 1) % d->info->phil_num]);
-	printf(BLUE "%zu_in_ms %d has taken a fork" RESET "\n", time, d->idx);
+	// 현재 철학자의 l,r 구분없이 저장하고 있다! 주의할 것.
+	pthread_mutex_lock(&(data.fork[first % d->info->phil_num]));
+
+		//pthread_mutex_lock(&(data.printer));
+			time = relative_time(d->info->start)/1000;
+			usleep(50);
+			//d->l = &(data.fork[first % d->info->phil_num]);
+			printf(BLUE "%zu_in_ms %d has taken a fork" RESET "\n", time, d->idx);
+		//pthread_mutex_unlock(&(data.printer));
+
+	pthread_mutex_lock(&(data.fork[second % d->info->phil_num]));
+		//pthread_mutex_lock(&(data.printer));
+			time = relative_time(d->info->start)/1000;
+			usleep(50);
+			//d->r = &(data.fork[second % d->info->phil_num]);
+			printf(BLUE "%zu_in_ms %d has taken a fork" RESET "\n", time, d->idx);
+		//pthread_mutex_unlock(&(data.printer));
 }
 
 void thread_eat(t_personal_info *d)
@@ -53,50 +66,51 @@ void thread_eat(t_personal_info *d)
 	// 포크 2개를 집는다.
 	thread_pick(d);
 	// ===============critical section ======================
-
 		// 먹는다.
+		//pthread_mutex_lock(&(data.printer));
 		time = relative_time(d->info->start)/1000;
-		usleep(100);
+		usleep(50);
 		printf(YELLOW "%zu_in_ms %d eating" RESET "\n", time, d->idx);
-		usleep(d->info->phil_eat_time * 1000 * 1000);
+		//pthread_mutex_unlock(&(data.printer));
+
+		usleep(d->info->phil_eat_time * 1000);
 
 		// 포크를 놓는다.
 		d->l = NULL;
 		d->r = NULL;
-
-		//printf("[DEBUG] %d drop forks.\n", d->idx);
 	// ===============critical section ======================
 	pthread_mutex_unlock(&(data.fork[d->idx % d->info->phil_num]));
 	pthread_mutex_unlock(&(data.fork[(d->idx + 1) % d->info->phil_num]));
 
 	// 다 먹고나서부터 다시 시간측정.
-	d->last_eat = get_time();
 	d->eat_count += 1;
+	d->last_eat = get_time();
 }
 
 void thread_sleep(t_personal_info *d)
 {
 	size_t time;
 
+
+	//pthread_mutex_lock(&(data.printer));
 	time = relative_time(d->info->start)/1000;
-	usleep(100);
+	usleep(50);
 	printf(GREEN "%zu_in_ms %d sleeping" RESET "\n", time, d->idx);
-	usleep(d->info->phil_slp_time * 1000 * 1000);
+	//pthread_mutex_unlock(&(data.printer));
+
+	usleep(d->info->phil_slp_time * 1000);
 }
 
 void thread_think(t_personal_info *d)
 {
 	size_t time;
 
+
+	//pthread_mutex_lock(&(data.printer));
 	time = relative_time(d->info->start)/1000;
-	usleep(100);
+	usleep(50);
 	printf(MAGENTA "%zu_in_ms %d thinking" RESET "\n", time, d->idx);
-	// while(1)
-	// {
-	// 	// 쓰레드의 그룹이 식사할 권한을 얻는다면 break.
-	// 	if (d->groupnum)	// 미완성..
-	// 		break;
-	// }
+	//pthread_mutex_unlock(&(data.printer));
 }
 
 void thread_A(t_personal_info *d)
@@ -124,19 +138,13 @@ void thread_AA(t_personal_info *d)
 {
 	// 홀짝 구분을 위한 시간차.
 	if (d->idx % 2 == 1)
-		usleep(1000);	// 0.001초 지연시키기.
+		usleep(500);	// 0.005초 지연시키기.
 	// 현재 쓰레드의 그룹 권한으로 먹을 수 있다면
 	while(1)
 	{
 		// 생존체크는 모니터링쓰레드에서 하도록 한다.
-
-		if (d->groupnum)
-		{
-			thread_eat(d);
-			thread_sleep(d);
-		}
-		// 먹을 수 없다면 THINK하며 기다림.
-		else
-			thread_think(d);
+		thread_eat(d);
+		thread_sleep(d);
+		thread_think(d);
 	}
 }
