@@ -6,15 +6,55 @@
 /*   By: gshim <gshim@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/08 22:22:31 by gshim             #+#    #+#             */
-/*   Updated: 2022/04/19 14:16:49 by gshim            ###   ########.fr       */
+/*   Updated: 2022/04/19 15:53:59 by gshim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../philosophers.h"
 
+bool	pthread_philo_init(t_info *info, t_data *data)
+{
+	int				i;
+
+	data->info = info;
+	data->dead_idx = -1;
+	if (pthread_mutex_init(&data->printer, NULL))
+		return (false);
+	i = 0;
+	while (i < info->phil_num)
+	{
+		if (pthread_mutex_init(&data->fork[i], NULL))
+			return (false);
+		data->phils_info[i] = get_personal_data(i, info, data);
+		if (!data->phils_info[i])
+			return (false);
+		if (pthread_create(&data->phils[i], NULL
+				, t_function, (void *)(data->phils_info[i])))
+			return (false);
+		i++;
+	}
+	return (true);
+}
+
+bool	get_info(int argc, char *argv[], t_info *info)
+{
+	info->phil_num = ft_atoi(argv[1]);
+	info->phil_life = ft_atoi(argv[2]);
+	info->phil_eat_time = ft_atoi(argv[3]);
+	info->phil_slp_time = ft_atoi(argv[4]);
+	if (argc == 6)
+		info->phil_min_eat = ft_atoi(argv[5]);
+	else
+		info->phil_min_eat = -1;
+	if (info->phil_num == 0 || info->phil_life == 0 || info->phil_eat_time == 0
+		|| info->phil_slp_time == 0 || info->phil_min_eat == 0)
+		return (false);
+	return (true);
+}
+
 t_personal_info	*get_personal_data(int idx, t_info *info, t_data *data)
 {
-	t_personal_info *ret;
+	t_personal_info	*ret;
 
 	ret = malloc(sizeof(t_personal_info));
 	if (!ret)
@@ -22,8 +62,8 @@ t_personal_info	*get_personal_data(int idx, t_info *info, t_data *data)
 	ret->idx = idx;
 	ret->info = info;
 	ret->printer = &data->printer;
-	ret->r = &data->fork[idx];
-	ret->l = &data->fork[idx + 1];
+	ret->r = &data->fork[idx % info->phil_num];
+	ret->l = &data->fork[(idx + 1) % info->phil_num];
 	ret->last_eat = get_time();
 	ret->eat_count = 0;
 	return (ret);

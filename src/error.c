@@ -6,18 +6,13 @@
 /*   By: gshim <gshim@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/19 13:24:57 by gshim             #+#    #+#             */
-/*   Updated: 2022/04/19 13:45:52 by gshim            ###   ########.fr       */
+/*   Updated: 2022/04/19 15:39:46 by gshim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../philosophers.h"
 
-int		argv_check()
-{
-
-}
-
-int		ft_exit(void (*f)(void), int ret)
+int	ft_exit(void (*f)(void), int ret)
 {
 	if (f)
 		f();

@@ -6,7 +6,7 @@
 /*   By: gshim <gshim@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/08 18:45:20 by gshim             #+#    #+#             */
-/*   Updated: 2022/04/19 15:01:37 by gshim            ###   ########.fr       */
+/*   Updated: 2022/04/19 15:54:10 by gshim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,6 @@ typedef struct s_info
 	int		phil_eat_time;
 	int		phil_slp_time;
 	int		phil_min_eat;
-	//size_t	start;
 }	t_info;
 
 // 개인정보
@@ -78,14 +77,20 @@ typedef enum e_phil_mode{
 //philosophers.c
 void			logging(int mode, int idx, pthread_mutex_t *printer);
 bool			get_info(int argc, char *argv[], t_info *info);
-void			*t_function(void *data);
+
 bool			pthread_philo_init(t_info *info, t_data *data);
 
 // personal_info.c
+bool			pthread_philo_init(t_info *info, t_data *data);
+bool			get_info(int argc, char *argv[], t_info *info);
 t_personal_info	*get_personal_data(int idx, t_info *info, t_data *data);
 
 // thread.c
-void			thread_AA(t_personal_info *d);
+void			thread_pick(t_personal_info *d);
+void			thread_eat(t_personal_info *d);
+void			thread_sleep(t_personal_info *d);
+void			thread_think(t_personal_info *d);
+void			*t_function(void *data);
 
 // monitor.c
 bool			thread_survive(t_personal_info *d);
