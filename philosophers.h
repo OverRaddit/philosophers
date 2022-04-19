@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   philosophers.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gshim <gshim@student.42.fr>                +#+  +:+       +#+        */
+/*   By: gshim <gshim@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/08 18:45:20 by gshim             #+#    #+#             */
-/*   Updated: 2022/04/18 22:11:09 by gshim            ###   ########.fr       */
+/*   Updated: 2022/04/19 15:01:37 by gshim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PHILOSOPHERS_H
 
-# define PHILOSOPHERS
+# define PHILOSOPHERS_H
 
 # include <stdio.h>
 # include <pthread.h>
@@ -38,16 +38,17 @@ typedef struct s_info
 	int		phil_eat_time;
 	int		phil_slp_time;
 	int		phil_min_eat;
-	size_t	start;
-
+	//size_t	start;
 }	t_info;
 
 // 개인정보
 typedef struct s_personal_info
 {
+	int				idx;
 	t_info			*info;
 	pthread_mutex_t	*printer;
-	int				idx;
+	pthread_mutex_t	*r;
+	pthread_mutex_t	*l;
 	size_t			last_eat;
 	int				eat_count;
 }	t_personal_info;
@@ -56,27 +57,29 @@ typedef struct s_personal_info
 typedef struct s_data
 {
 	pthread_t		phils[OPEN_MAX];
-	int				phils_id[OPEN_MAX];
+
 	t_personal_info	*phils_info[OPEN_MAX];
 	pthread_mutex_t	fork[OPEN_MAX];
 	pthread_mutex_t	printer;
 	int				dead_idx;
+	t_info			*info;
 }	t_data;
 
 // 로깅 유형
-enum e_phil_mode {
+typedef enum e_phil_mode{
+	INIT = 42,
 	GRAB = 0,
 	EAT = 1,
 	SLEEP = 2,
 	THINK = 3,
 	DIE = 4,
-};
+}	t_phil_mode;
 
 //philosophers.c
-void			logging(int mode, int idx);
-void			get_info(t_info *info, char *argv[]);
+void			logging(int mode, int idx, pthread_mutex_t *printer);
+bool			get_info(int argc, char *argv[], t_info *info);
 void			*t_function(void *data);
-void			pthread_philo_init(t_info *info, t_data *data);
+bool			pthread_philo_init(t_info *info, t_data *data);
 
 // personal_info.c
 t_personal_info	*get_personal_data(int idx, t_info *info, t_data *data);
@@ -95,4 +98,6 @@ size_t			get_time(void);
 size_t			relative_time(size_t start);
 void			gsleep(size_t ms);
 
+// ERROR.c
+int				ft_exit(void (*f)(void), int ret);
 #endif

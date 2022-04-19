@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   monitor.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gshim <gshim@student.42.fr>                +#+  +:+       +#+        */
+/*   By: gshim <gshim@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/13 16:21:45 by gshim             #+#    #+#             */
-/*   Updated: 2022/04/18 21:40:52 by gshim            ###   ########.fr       */
+/*   Updated: 2022/04/19 15:33:39 by gshim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,24 +24,23 @@ bool	thread_done(t_personal_info *d)
 
 void	*monitoring(void *d)
 {
-	struct timeval	time;
-	int				i;
+	t_data	*data;
+	int		i;
 
-	t_data *data = (t_data *)d;
-
+	data = (t_data *)d;
+	t_personal_info *dd = data->phils_info[i];
 	printf("MONITORING START!!\n");
-	// 종료조건 무한검사.
 	while(1)
 	{
 		i = 0;
-		while(i < info.phil_num)
+		while(i < data->info->phil_num)
 		{
 			if (!thread_survive(data->phils_info[i]))	// i번째 쓰레드가 죽었다면,
 			{
 				data->dead_idx = i;
 				return (0);
 			}
-			if (info.phil_min_eat != -1 && thread_done(data->phils_info[i])) // 식사횟수를 만족했다면
+			if (data->info->phil_min_eat != -1 && thread_done(data->phils_info[i])) // 식사횟수를 만족했다면
 				return (0);
 			i++;
 		}
