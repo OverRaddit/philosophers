@@ -3,16 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   philosophers.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gshim <gshim@student.42seoul.kr>           +#+  +:+       +#+        */
+/*   By: gshim <gshim@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/08 18:43:14 by gshim             #+#    #+#             */
-/*   Updated: 2022/04/19 15:54:19 by gshim            ###   ########.fr       */
+/*   Updated: 2022/04/19 17:44:34 by gshim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../philosophers.h"
 
-// 오버플로 검사 필요...? 푸쉬스왑때의 코드를 찾아볼까!
 void	logging(int mode, int idx, pthread_mutex_t *printer)
 {
 	static size_t	start;
@@ -58,17 +57,16 @@ static void	thread(void)
 
 int	main(int argc, char *argv[])
 {
-	pthread_t	monitor_thread;
 	t_data		data;
 	t_info		info;
 
 	if (argc < 5 || argc > 6 || !get_info(argc, argv, &info))
 		return (ft_exit(usage, -1));
-	logging(INIT, 42, &data.printer);
+	logging(INIT, -42, &data.printer);
 	if (!pthread_philo_init(&info, &data))
 		return (ft_exit(thread, -1));
-	pthread_create(&monitor_thread, NULL, monitoring, (void *)&data);
-	pthread_join(monitor_thread, NULL);
+	pthread_create(&data.monitor_thread, NULL, monitoring, (void *)&data);
+	pthread_join(data.monitor_thread, NULL);
 	philo_exit(&data);
 	return (0);
 }

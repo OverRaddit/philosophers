@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: gshim <gshim@student.42seoul.kr>           +#+  +:+       +#+         #
+#    By: gshim <gshim@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/02/22 17:48:50 by gshim             #+#    #+#              #
-#    Updated: 2022/04/19 16:08:51 by gshim            ###   ########.fr        #
+#    Updated: 2022/04/19 17:36:51 by gshim            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -36,7 +36,8 @@ CFLAGS = -Wall -Wextra -Werror -g -fsanitize=address
 # =============================================================================
 NAME		=	philosophers
 SRCS_DIR	=	./src/
-SRC_LIST	=	personal_info.c					\
+SRC_LIST	=	init.c							\
+				valid.c							\
 				philosophers.c					\
 				thread.c 						\
 				monitor.c						\
@@ -56,7 +57,7 @@ $(NAME)			:	$(OBJS)
 
 $(SRCS_DIR)/%.o	:	$(SRCS_DIR)/%.c
 	@echo $(YELLOW) "Compiling...\t" $< $(EOC) $(LINE_CLEAR)
-	$(CC) $(CFLAGS) -c $< -o $@
+	@$(CC) $(CFLAGS) -c $< -o $@
 
 # =============================================================================
 # Rules

@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gshim <gshim@student.42seoul.kr>           +#+  +:+       +#+        */
+/*   By: gshim <gshim@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/04 21:43:27 by gshim             #+#    #+#             */
-/*   Updated: 2022/04/12 14:21:17 by gshim            ###   ########.fr       */
+/*   Updated: 2022/04/19 17:44:53 by gshim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <limits.h>
+#include "../philosophers.h"
 
 static int	get_sign(char c)
 {
@@ -53,4 +53,14 @@ int	ft_atoi(const char *str)
 	}
 	ret *= sign;
 	return ((int)ret);
+}
+
+size_t	ft_strlen(const char *str)
+{
+	size_t	i;
+
+	i = 0;
+	while (str[i] != '\0')
+		i++;
+	return (i);
 }

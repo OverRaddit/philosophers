@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   monitor.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gshim <gshim@student.42seoul.kr>           +#+  +:+       +#+        */
+/*   By: gshim <gshim@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/13 16:21:45 by gshim             #+#    #+#             */
-/*   Updated: 2022/04/19 15:41:35 by gshim            ###   ########.fr       */
+/*   Updated: 2022/04/19 20:01:47 by gshim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,12 +26,14 @@ void	*monitoring(void *d)
 {
 	t_data	*data;
 	int		i;
+	int		full_num;
 
 	data = (t_data *)d;
 	printf("MONITORING START!!\n");
 	while (1)
 	{
 		i = 0;
+		full_num = 0;
 		while (i < data->info->phil_num)
 		{
 			if (!thread_survive(data->phils_info[i]))
@@ -41,8 +43,10 @@ void	*monitoring(void *d)
 			}
 			if (data->info->phil_min_eat != -1
 				&& thread_done(data->phils_info[i]))
-				return (0);
+				full_num++;
 			i++;
 		}
+		if (data->info->phil_min_eat != -1 && full_num == data->info->phil_num)
+			return (0);
 	}
 }

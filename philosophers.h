@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philosophers.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gshim <gshim@student.42seoul.kr>           +#+  +:+       +#+        */
+/*   By: gshim <gshim@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/08 18:45:20 by gshim             #+#    #+#             */
-/*   Updated: 2022/04/19 15:54:10 by gshim            ###   ########.fr       */
+/*   Updated: 2022/04/19 17:42:25 by gshim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,9 +34,9 @@
 typedef struct s_info
 {
 	int		phil_num;
-	int		phil_life;
-	int		phil_eat_time;
-	int		phil_slp_time;
+	size_t	phil_life;
+	size_t	phil_eat_time;
+	size_t	phil_slp_time;
 	int		phil_min_eat;
 }	t_info;
 
@@ -56,9 +56,9 @@ typedef struct s_personal_info
 typedef struct s_data
 {
 	pthread_t		phils[OPEN_MAX];
-
 	t_personal_info	*phils_info[OPEN_MAX];
 	pthread_mutex_t	fork[OPEN_MAX];
+	pthread_t		monitor_thread;
 	pthread_mutex_t	printer;
 	int				dead_idx;
 	t_info			*info;
@@ -80,7 +80,7 @@ bool			get_info(int argc, char *argv[], t_info *info);
 
 bool			pthread_philo_init(t_info *info, t_data *data);
 
-// personal_info.c
+// init.c
 bool			pthread_philo_init(t_info *info, t_data *data);
 bool			get_info(int argc, char *argv[], t_info *info);
 t_personal_info	*get_personal_data(int idx, t_info *info, t_data *data);
@@ -98,6 +98,7 @@ bool			thread_done(t_personal_info *d);
 void			*monitoring(void *data);
 
 // UTIL
+size_t			ft_strlen(const char *str);
 int				ft_atoi(const char *str);
 size_t			get_time(void);
 size_t			relative_time(size_t start);
@@ -105,4 +106,8 @@ void			gsleep(size_t ms);
 
 // ERROR.c
 int				ft_exit(void (*f)(void), int ret);
+
+// valid.c
+int				is_valid(char *input);
+
 #endif
