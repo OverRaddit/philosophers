@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philosophers.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gshim <gshim@student.42.fr>                +#+  +:+       +#+        */
+/*   By: gshim <gshim@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/08 18:45:20 by gshim             #+#    #+#             */
-/*   Updated: 2022/04/19 17:42:25 by gshim            ###   ########.fr       */
+/*   Updated: 2022/04/21 10:43:29 by gshim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,12 +72,12 @@ typedef enum e_phil_mode{
 	SLEEP = 2,
 	THINK = 3,
 	DIE = 4,
+	FULL = 5,
 }	t_phil_mode;
 
 //philosophers.c
 void			logging(int mode, int idx, pthread_mutex_t *printer);
 bool			get_info(int argc, char *argv[], t_info *info);
-
 bool			pthread_philo_init(t_info *info, t_data *data);
 
 // init.c

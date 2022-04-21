@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gshim <gshim@student.42.fr>                +#+  +:+       +#+        */
+/*   By: gshim <gshim@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/08 22:22:31 by gshim             #+#    #+#             */
-/*   Updated: 2022/04/19 17:44:26 by gshim            ###   ########.fr       */
+/*   Updated: 2022/04/21 10:37:34 by gshim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,8 @@ bool	get_info(int argc, char *argv[], t_info *info)
 		info->phil_min_eat = ft_atoi(argv[5]);
 	else
 		info->phil_min_eat = -1;
-	if (info->phil_num == 0 || info->phil_life == 0 || info->phil_eat_time == 0
-		|| info->phil_slp_time == 0 || info->phil_min_eat == 0)
+	if (info->phil_num <= 0 || info->phil_life <= 0 || info->phil_eat_time <= 0
+		|| info->phil_slp_time <= 0 || ((argc == 6) && (info->phil_min_eat <= 0)))
 		return (false);
 	return (true);
 }

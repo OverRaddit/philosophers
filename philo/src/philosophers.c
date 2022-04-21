@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philosophers.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gshim <gshim@student.42.fr>                +#+  +:+       +#+        */
+/*   By: gshim <gshim@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/08 18:43:14 by gshim             #+#    #+#             */
-/*   Updated: 2022/04/19 17:44:34 by gshim            ###   ########.fr       */
+/*   Updated: 2022/04/21 10:44:57 by gshim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,8 @@ void	logging(int mode, int idx, pthread_mutex_t *printer)
 		printf("%10zu_ms  " RED "%d died" RESET "\n", time, idx);
 	else if (mode == INIT)
 		printf(GREEN "TIMER START!\n" RESET);
+	else if (mode == FULL)
+		printf(GREEN "Every philosopher is full!\n" RESET);
 	pthread_mutex_unlock(printer);
 }
 
@@ -40,6 +42,8 @@ void	philo_exit(t_data *data)
 {
 	if (data->dead_idx != -1)
 		logging(DIE, data->dead_idx, &data->printer);
+	else
+		logging(FULL, data->dead_idx, &data->printer);
 	pthread_mutex_destroy(&(data->printer));
 }
 
