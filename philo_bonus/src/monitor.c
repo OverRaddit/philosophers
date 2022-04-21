@@ -6,7 +6,7 @@
 /*   By: gshim <gshim@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/13 16:21:45 by gshim             #+#    #+#             */
-/*   Updated: 2022/04/21 19:12:04 by gshim            ###   ########.fr       */
+/*   Updated: 2022/04/21 22:50:03 by gshim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,6 @@ void	*monitoring(void *d)
 {
 	t_personal_info	*p;
 	int		i;
-	int		full_num;
 
 	p = (t_personal_info *)d;
 	printf("MONITORING START!!\n");
@@ -47,11 +46,6 @@ void	*monitoring(void *d)
 				&& thread_done(p))
 				full_num++;
 			i++;
-		}
-		if (p->info->phil_min_eat != -1 && full_num == p->info->phil_num)
-		{
-			//sem_post(p->full);
-			exit(0);
 		}
 	}
 }
