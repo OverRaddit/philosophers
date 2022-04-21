@@ -49,3 +49,12 @@ https://codetravel.tistory.com/31
 
 고아프로세스가 작업을 종료하면 init프로세스가 wait함수를 호출하여 고아 프로세스의 종료상태를
 회수함으로써 좀비 프로세스가 되는 것을 방지합니다.
+
+
+## kill 함수
+```C
+#include <signal.h>
+int kill(pid_t pid, int sig);	// 대상 프로세스 ID, 시그널 번호
+```
+pid
+return 0 success, -1 fail

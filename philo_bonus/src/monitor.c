@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   monitor.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gshim <gshim@student.42seoul.kr>           +#+  +:+       +#+        */
+/*   By: gshim <gshim@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/13 16:21:45 by gshim             #+#    #+#             */
-/*   Updated: 2022/04/21 12:17:28 by gshim            ###   ########.fr       */
+/*   Updated: 2022/04/21 19:12:04 by gshim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,30 +26,32 @@ bool	thread_done(t_personal_info *d)
 // 자기자신만 보면 된다.
 void	*monitoring(void *d)
 {
-	t_personal_info	*pinfo;
+	t_personal_info	*p;
 	int		i;
 	int		full_num;
 
-	pinfo = (t_personal_info *)d;
+	p = (t_personal_info *)d;
 	printf("MONITORING START!!\n");
 	while (1)
 	{
 		i = 0;
 		full_num = 0;
-		while (i < pinfo->info->phil_num)
+		while (i < p->info->phil_num)
 		{
-			if (!thread_survive(pinfo))
+			if (!thread_survive(p))
 			{
-				//data->dead_idx = i; => 이걸 어떻게 대체하지? 해당 프로세스가 몇번 철학자인지 어떻게 알려줌?
-				sem_wait(pinfo->die);
-				return (0);
+				//sem_post(p->die);
+				exit(1);
 			}
-			if (pinfo->info->phil_min_eat != -1
-				&& thread_done(pinfo)
-				sem_wait(pinfo->full);
+			if (p->info->phil_min_eat != -1
+				&& thread_done(p))
+				full_num++;
 			i++;
 		}
-		if (data->info->phil_min_eat != -1 && full_num == data->info->phil_num)
-			return (0);
+		if (p->info->phil_min_eat != -1 && full_num == p->info->phil_num)
+		{
+			//sem_post(p->full);
+			exit(0);
+		}
 	}
 }

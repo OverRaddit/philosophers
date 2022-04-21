@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philosophers.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gshim <gshim@student.42seoul.kr>           +#+  +:+       +#+        */
+/*   By: gshim <gshim@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/08 18:45:20 by gshim             #+#    #+#             */
-/*   Updated: 2022/04/21 12:20:17 by gshim            ###   ########.fr       */
+/*   Updated: 2022/04/21 15:11:06 by gshim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,9 @@
 # include <stdbool.h>
 # include <sys/time.h>
 # include <errno.h>
+# include <string.h>
 # include <semaphore.h>
+# include <signal.h>
 
 # define RED "\x1b[31m"
 # define GREEN "\x1b[32m"
@@ -60,8 +62,9 @@ typedef struct s_personal_info
 // 쓰레드 및 뮤텍스 데이터
 typedef struct s_data
 {
-	pthread_t		phils[OPEN_MAX];
-	t_personal_info	*phils_info[OPEN_MAX];
+	//pthread_t		phils[OPEN_MAX];
+	//t_personal_info	*phils_info[OPEN_MAX];
+	pid_t			philo[OPEN_MAX];
 
 	sem_t			*fork;
 	sem_t			*print;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gshim <gshim@student.42seoul.kr>           +#+  +:+       +#+        */
+/*   By: gshim <gshim@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/08 22:22:31 by gshim             #+#    #+#             */
-/*   Updated: 2022/04/21 12:20:21 by gshim            ###   ########.fr       */
+/*   Updated: 2022/04/21 16:19:50 by gshim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,9 +62,11 @@ bool	pthread_philo_init(t_info *info, t_data *data)
 
 	if (!semaphore(&data->fork, "/fork", info->phil_num)
 		|| !semaphore(&data->print, "/print", 1)
-		|| !semaphore(&data->die, "/die", 0)
-		|| !semaphore(&data->full, "/full", 0))
+		|| !semaphore(&data->die, "/die", info->phil_num)
+		|| !semaphore(&data->full, "/full", info->phil_num))
 		return (false);
+
+	printf(CYAN "[DEBUG]semaphore init complete\n" RESET);
 
 	i = 0;
 	// thread to process
@@ -75,6 +77,9 @@ bool	pthread_philo_init(t_info *info, t_data *data)
 			return (false);
 		else if (ret == 0)
 		{	/* child process */
+
+
+
 			t_personal_info *pinfo = get_personal_data(i, info, data);
 			if (!pinfo)
 				return (false);
@@ -88,9 +93,14 @@ bool	pthread_philo_init(t_info *info, t_data *data)
 			pthread_t		monitor;
 			pthread_create(&monitor, NULL, monitoring, (void *)&data);	// 어떻게보내지
 
+			// 현재 모니터가 바로 종료된다... 왜?
 			pthread_join(monitor, NULL);
-			return (0);
+
+
+			printf(CYAN "[DEBUG]%d process end\n" RESET, i);
+			return (true);
 		}
+		data->philo[i] = ret;
 		i++;
 	}
 	return (true);

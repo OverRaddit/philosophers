@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philosophers.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gshim <gshim@student.42seoul.kr>           +#+  +:+       +#+        */
+/*   By: gshim <gshim@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/08 18:43:14 by gshim             #+#    #+#             */
-/*   Updated: 2022/04/21 12:22:09 by gshim            ###   ########.fr       */
+/*   Updated: 2022/04/21 15:17:41 by gshim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,18 +40,23 @@ void	logging(int mode, int idx, sem_t *printer)
 
 void	philo_exit(t_data *data)
 {
+	int	i;
+
 	if (data->dead_idx != -1)
 		logging(DIE, data->dead_idx, data->print);
 	else
 		logging(FULL, data->dead_idx, data->print);
-	pthread_mutex_destroy(data->print);
 
 	// 자식프로세스 kill 시그널
+	i = -1;
+	while(++i < data->info->phil_num)
+		kill(data->philo[i], SIGKILL);
+
 
 	// 세마포 삭제
 	if (sem_close(data->fork) || sem_close(data->print)
 		|| sem_close(data->die) || sem_close(data->full))
-			stderror(errno);
+			strerror(errno);
 }
 
 static void	usage(void)
@@ -61,25 +66,34 @@ static void	usage(void)
 	printf(RED "[number_of_times_each_philosopher_must_eat]\n" RESET);
 }
 
-static void	fork(void)
+static void	process(void)
 {
-	printf("There's something wrong in" RED "Fork\n" RESET);
+	printf("There's something wrong in" RED " Fork()\n" RESET);
 }
 
 int	main(int argc, char *argv[])
 {
 	t_data		data;
 	t_info		info;
+	pid_t		dead_philo;
 
 	if (argc < 5 || argc > 6 || !get_info(argc, argv, &info))
 		return (ft_exit(usage, -1));
-	logging(INIT, -42, &data.print);
+	logging(INIT, -42, data.print);
 	if (!pthread_philo_init(&info, &data))
-		return (ft_exit(fork, -1));
+		return (ft_exit(process, -1));
 
-	// waitpid
-	waitpid(-1);
-
+	// 철학자의 종료를 기다리고, 몇번 철학자가 종료되었는 지 저장한다.
+	dead_philo = waitpid(-1, NULL, 0);
+	int i = 0;
+	while(i < info.phil_num)
+	{
+		if (data.philo[i] == dead_philo)
+		{
+			data.dead_idx = i;
+			break ;
+		}
+	}
 	philo_exit(&data);
 	return (0);
 }

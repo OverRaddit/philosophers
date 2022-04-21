@@ -1,2 +1,0 @@
-[31m./philosophers phil_num time_to_die [0m[31mtime_to_eat time_to_sleep [0m[31m[number_of_times_each_philosopher_must_eat]
-[0m

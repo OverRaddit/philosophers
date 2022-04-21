@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   thread.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gshim <gshim@student.42seoul.kr>           +#+  +:+       +#+        */
+/*   By: gshim <gshim@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/11 19:34:21 by gshim             #+#    #+#             */
-/*   Updated: 2022/04/21 12:16:46 by gshim            ###   ########.fr       */
+/*   Updated: 2022/04/21 16:16:28 by gshim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,11 @@ void	*t_function(void *pinfo)
 	t_personal_info	*d;
 
 	d = (t_personal_info *)pinfo;
+
+	// 세마포어 집기
+	sem_wait(d->die);
+	sem_wait(d->full);
+
 	if (d->idx % 2 == 1)
 		gsleep(50);
 	while (1)
