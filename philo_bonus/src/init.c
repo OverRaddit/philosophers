@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gshim <gshim@student.42.fr>                +#+  +:+       +#+        */
+/*   By: gshim <gshim@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/08 22:22:31 by gshim             #+#    #+#             */
-/*   Updated: 2022/04/21 16:19:50 by gshim            ###   ########.fr       */
+/*   Updated: 2022/04/22 12:05:17 by gshim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,8 +45,11 @@ t_personal_info	*get_personal_data(int idx, t_info *info, t_data *data)
 	ret->info = info;
 	ret->fork = data->fork;
 	ret->print = data->print;
+
+	// 필요없다?
 	ret->die = data->die;
 	ret->full = data->full;
+
 	ret->last_eat = get_time();
 	ret->eat_count = 0;
 	return (ret);
@@ -77,31 +80,32 @@ bool	pthread_philo_init(t_info *info, t_data *data)
 			return (false);
 		else if (ret == 0)
 		{	/* child process */
-
-
-
 			t_personal_info *pinfo = get_personal_data(i, info, data);
 			if (!pinfo)
 				return (false);
 
 			// 워커쓰레드
 			pthread_t	philo;
-			if (pthread_create(&philo, NULL, t_function, (void *)(get_personal_data(i, info, data))))
+			if (pthread_create(&philo, NULL, t_function, (void *)pinfo))
 				return (false);
 
 			// 모니터링 쓰레드(자신의 죽음 감시)
 			pthread_t		monitor;
-			pthread_create(&monitor, NULL, monitoring, (void *)&data);	// 어떻게보내지
+			if (pthread_create(&monitor, NULL, phil_monitoring, (void *)pinfo))
+				return (false);
 
 			// 현재 모니터가 바로 종료된다... 왜?
 			pthread_join(monitor, NULL);
 
-
-			printf(CYAN "[DEBUG]%d process end\n" RESET, i);
-			return (true);
+			exit(42);
 		}
 		data->philo[i] = ret;
 		i++;
 	}
+
+	// full 쓰레드(자신의 죽음 감시)
+	pthread_t		full_monitor;
+	if (pthread_create(&full_monitor, NULL, full_monitoring, (void *)data))
+		return (false);
 	return (true);
 }

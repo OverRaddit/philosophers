@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   monitor.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gshim <gshim@student.42.fr>                +#+  +:+       +#+        */
+/*   By: gshim <gshim@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/13 16:21:45 by gshim             #+#    #+#             */
-/*   Updated: 2022/04/21 22:50:03 by gshim            ###   ########.fr       */
+/*   Updated: 2022/04/22 12:08:51 by gshim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,30 +22,40 @@ bool	thread_done(t_personal_info *d)
 	return (d->eat_count == d->info->phil_min_eat);
 }
 
-
-// 자기자신만 보면 된다.
-void	*monitoring(void *d)
+void	*phil_monitoring(void *d)
 {
 	t_personal_info	*p;
-	int		i;
 
 	p = (t_personal_info *)d;
-	printf("MONITORING START!!\n");
+	sem_wait(p->full);
 	while (1)
 	{
-		i = 0;
-		full_num = 0;
-		while (i < p->info->phil_num)
+		if (!thread_survive(p))
 		{
-			if (!thread_survive(p))
-			{
-				//sem_post(p->die);
-				exit(1);
-			}
-			if (p->info->phil_min_eat != -1
-				&& thread_done(p))
-				full_num++;
-			i++;
+			//printf("%d 사망\n", p->idx);
+			exit(1);
+		}
+		if (p->info->phil_min_eat != -1
+			&& thread_done(p))
+		{
+			//printf("%d 식사끝\n", p->idx);
+			sem_post(p->full);
+			exit(0);
 		}
 	}
+}
+
+void	*full_monitoring(void *d)
+{
+	t_data			*data;
+	int				i;
+
+	data = (t_data *)d;
+	i = -1;
+	while (++i < data->info->phil_num)
+	{
+		sem_wait(data->full);
+	}
+	philo_exit(data);
+	return (0);
 }

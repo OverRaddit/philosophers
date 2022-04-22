@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philosophers.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gshim <gshim@student.42.fr>                +#+  +:+       +#+        */
+/*   By: gshim <gshim@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/08 18:45:20 by gshim             #+#    #+#             */
-/*   Updated: 2022/04/21 15:11:06 by gshim            ###   ########.fr       */
+/*   Updated: 2022/04/22 11:50:11 by gshim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,6 +91,7 @@ typedef enum e_phil_mode{
 void			logging(int mode, int idx, sem_t *printer);
 bool			get_info(int argc, char *argv[], t_info *info);
 bool			pthread_philo_init(t_info *info, t_data *data);
+void			philo_exit(t_data *data);
 
 // init.c
 bool			pthread_philo_init(t_info *info, t_data *data);
@@ -107,7 +108,8 @@ void			*t_function(void *data);
 // monitor.c
 bool			thread_survive(t_personal_info *d);
 bool			thread_done(t_personal_info *d);
-void			*monitoring(void *data);
+void			*phil_monitoring(void *d);
+void			*full_monitoring(void *d);
 
 // UTIL
 size_t			ft_strlen(const char *str);
@@ -124,5 +126,7 @@ int				is_valid(char *input);
 
 // semaphore.c
 bool			semaphore(sem_t **sem, char *filename, size_t size);
+
+//
 
 #endif

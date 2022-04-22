@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philosophers.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gshim <gshim@student.42.fr>                +#+  +:+       +#+        */
+/*   By: gshim <gshim@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/08 18:43:14 by gshim             #+#    #+#             */
-/*   Updated: 2022/04/21 15:17:41 by gshim            ###   ########.fr       */
+/*   Updated: 2022/04/22 12:10:27 by gshim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,11 +52,16 @@ void	philo_exit(t_data *data)
 	while(++i < data->info->phil_num)
 		kill(data->philo[i], SIGKILL);
 
+	printf("자식프로세스 kill 완료\n");
 
 	// 세마포 삭제
-	if (sem_close(data->fork) || sem_close(data->print)
-		|| sem_close(data->die) || sem_close(data->full))
-			strerror(errno);
+	// if (sem_close(data->fork) || sem_close(data->print)
+	// 	|| sem_close(data->die) || sem_close(data->full))
+	// 		strerror(errno);
+
+	printf("세마포어 삭제완료\n");
+
+	exit(0);
 }
 
 static void	usage(void)
@@ -75,7 +80,8 @@ int	main(int argc, char *argv[])
 {
 	t_data		data;
 	t_info		info;
-	pid_t		dead_philo;
+	pid_t		exit_process;
+	int			status;
 
 	if (argc < 5 || argc > 6 || !get_info(argc, argv, &info))
 		return (ft_exit(usage, -1));
@@ -83,17 +89,25 @@ int	main(int argc, char *argv[])
 	if (!pthread_philo_init(&info, &data))
 		return (ft_exit(process, -1));
 
+
+
 	// 철학자의 종료를 기다리고, 몇번 철학자가 종료되었는 지 저장한다.
-	dead_philo = waitpid(-1, NULL, 0);
+	exit_process = wait(&status);
+	printf(YELLOW "[DEBUG]%d process terminated %d!\n" RESET, exit_process, WIFEXITED(status));
 	int i = 0;
-	while(i < info.phil_num)
+	if (WIFEXITED(status) && WEXITSTATUS(status) == 1)
 	{
-		if (data.philo[i] == dead_philo)
+		while(i < info.phil_num)
 		{
-			data.dead_idx = i;
-			break ;
+			if (data.philo[i] == exit_process)
+			{
+				data.dead_idx = i;
+				printf("DEBUG] dead process is %d\n", i);
+				break ;
+			}
 		}
 	}
+	printf(RED "[DEBUG]%d process terminated first!\n" RESET, data.dead_idx);
 	philo_exit(&data);
 	return (0);
 }
