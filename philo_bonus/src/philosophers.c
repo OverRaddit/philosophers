@@ -6,7 +6,7 @@
 /*   By: gshim <gshim@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/08 18:43:14 by gshim             #+#    #+#             */
-/*   Updated: 2022/04/22 21:33:28 by gshim            ###   ########.fr       */
+/*   Updated: 2022/04/22 21:39:54 by gshim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,8 +70,6 @@ int	main(int argc, char *argv[])
 {
 	t_data		data;
 	t_info		info;
-	pid_t		pid;
-	int			status;
 
 	if (argc < 5 || argc > 6 || !get_info(argc, argv, &info))
 		return (ft_exit(usage, -1));

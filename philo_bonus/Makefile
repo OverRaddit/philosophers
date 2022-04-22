@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: gshim <gshim@student.42seoul.kr>           +#+  +:+       +#+         #
+#    By: gshim <gshim@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/02/22 17:48:50 by gshim             #+#    #+#              #
-#    Updated: 2022/04/22 21:11:27 by gshim            ###   ########.fr        #
+#    Updated: 2022/04/22 21:39:40 by gshim            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,10 +28,9 @@ LINE_CLEAR	=	"\x1b[1A\x1b[M"
 # Command Variables
 # =============================================================================
 CC			=	gcc
-CFLAGS		=
-#CFLAGS		=	-Wall -Wextra -Werror
+#CFLAGS		=
+CFLAGS		=	-Wall -Wextra -Werror
 CDEBUG		=	-g -fsanitize=address
-CFLAGS		=	-g
 
 # =============================================================================
 # File Variables
