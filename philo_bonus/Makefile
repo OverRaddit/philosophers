@@ -6,7 +6,7 @@
 #    By: gshim <gshim@student.42seoul.kr>           +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/02/22 17:48:50 by gshim             #+#    #+#              #
-#    Updated: 2022/04/22 10:11:34 by gshim            ###   ########.fr        #
+#    Updated: 2022/04/22 21:11:27 by gshim            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,6 +31,7 @@ CC			=	gcc
 CFLAGS		=
 #CFLAGS		=	-Wall -Wextra -Werror
 CDEBUG		=	-g -fsanitize=address
+CFLAGS		=	-g
 
 # =============================================================================
 # File Variables

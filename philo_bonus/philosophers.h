@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philosophers.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gshim <gshim@student.42seoul.kr>           +#+  +:+       +#+        */
+/*   By: gshim <gshim@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/08 18:45:20 by gshim             #+#    #+#             */
-/*   Updated: 2022/04/22 11:50:11 by gshim            ###   ########.fr       */
+/*   Updated: 2022/04/22 17:56:47 by gshim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,6 @@ typedef struct s_personal_info
 
 	sem_t			*fork;
 	sem_t			*print;
-	sem_t			*die;
 	sem_t			*full;
 
 	size_t			last_eat;
@@ -62,16 +61,14 @@ typedef struct s_personal_info
 // 쓰레드 및 뮤텍스 데이터
 typedef struct s_data
 {
-	//pthread_t		phils[OPEN_MAX];
-	//t_personal_info	*phils_info[OPEN_MAX];
 	pid_t			philo[OPEN_MAX];
 
 	sem_t			*fork;
 	sem_t			*print;
-	sem_t			*die;
 	sem_t			*full;
 
 	pthread_t		monitor_thread;
+	pthread_t		full_monitor;
 	int				dead_idx;
 	t_info			*info;
 }	t_data;
@@ -94,6 +91,7 @@ bool			pthread_philo_init(t_info *info, t_data *data);
 void			philo_exit(t_data *data);
 
 // init.c
+bool			phil_process(int i, t_info *info, t_data *data);
 bool			pthread_philo_init(t_info *info, t_data *data);
 bool			get_info(int argc, char *argv[], t_info *info);
 t_personal_info	*get_personal_data(int idx, t_info *info, t_data *data);
@@ -110,6 +108,7 @@ bool			thread_survive(t_personal_info *d);
 bool			thread_done(t_personal_info *d);
 void			*phil_monitoring(void *d);
 void			*full_monitoring(void *d);
+void			get_die_phil(t_data *data, t_info *info);
 
 // UTIL
 size_t			ft_strlen(const char *str);

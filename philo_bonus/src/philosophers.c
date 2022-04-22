@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philosophers.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gshim <gshim@student.42seoul.kr>           +#+  +:+       +#+        */
+/*   By: gshim <gshim@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/08 18:43:14 by gshim             #+#    #+#             */
-/*   Updated: 2022/04/22 12:10:27 by gshim            ###   ########.fr       */
+/*   Updated: 2022/04/22 21:33:28 by gshim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,39 +29,15 @@ void	logging(int mode, int idx, sem_t *printer)
 		printf("%10zu_ms  " GREEN "%d sleeping" RESET "\n", time, idx);
 	else if (mode == THINK)
 		printf("%10zu_ms  " MAGENTA "%d is thinking" RESET "\n", time, idx);
-	else if (mode == DIE)
-		printf("%10zu_ms  " RED "%d died" RESET "\n", time, idx);
-	else if (mode == INIT)
-		printf(GREEN "TIMER START!\n" RESET);
-	else if (mode == FULL)
-		printf(GREEN "Every philosopher is full!\n" RESET);
-	sem_post(printer);
-}
-
-void	philo_exit(t_data *data)
-{
-	int	i;
-
-	if (data->dead_idx != -1)
-		logging(DIE, data->dead_idx, data->print);
 	else
-		logging(FULL, data->dead_idx, data->print);
-
-	// 자식프로세스 kill 시그널
-	i = -1;
-	while(++i < data->info->phil_num)
-		kill(data->philo[i], SIGKILL);
-
-	printf("자식프로세스 kill 완료\n");
-
-	// 세마포 삭제
-	// if (sem_close(data->fork) || sem_close(data->print)
-	// 	|| sem_close(data->die) || sem_close(data->full))
-	// 		strerror(errno);
-
-	printf("세마포어 삭제완료\n");
-
-	exit(0);
+	{
+		if (mode == DIE)
+			printf("%10zu_ms  " RED "%d died" RESET "\n", time, idx);
+		else if (mode == FULL)
+			printf(GREEN "Every philosopher is full!\n" RESET);
+		return ;
+	}
+	sem_post(printer);
 }
 
 static void	usage(void)
@@ -76,11 +52,25 @@ static void	process(void)
 	printf("There's something wrong in" RED " Fork()\n" RESET);
 }
 
+void	philo_exit(t_data *data)
+{
+	int	i;
+
+	if (data->dead_idx != -1)
+		logging(DIE, data->dead_idx, data->print);
+	else
+		logging(FULL, data->dead_idx, data->print);
+	i = -1;
+	while (++i < data->info->phil_num)
+		kill(data->philo[i], SIGKILL);
+	exit(0);
+}
+
 int	main(int argc, char *argv[])
 {
 	t_data		data;
 	t_info		info;
-	pid_t		exit_process;
+	pid_t		pid;
 	int			status;
 
 	if (argc < 5 || argc > 6 || !get_info(argc, argv, &info))
@@ -88,26 +78,7 @@ int	main(int argc, char *argv[])
 	logging(INIT, -42, data.print);
 	if (!pthread_philo_init(&info, &data))
 		return (ft_exit(process, -1));
-
-
-
-	// 철학자의 종료를 기다리고, 몇번 철학자가 종료되었는 지 저장한다.
-	exit_process = wait(&status);
-	printf(YELLOW "[DEBUG]%d process terminated %d!\n" RESET, exit_process, WIFEXITED(status));
-	int i = 0;
-	if (WIFEXITED(status) && WEXITSTATUS(status) == 1)
-	{
-		while(i < info.phil_num)
-		{
-			if (data.philo[i] == exit_process)
-			{
-				data.dead_idx = i;
-				printf("DEBUG] dead process is %d\n", i);
-				break ;
-			}
-		}
-	}
-	printf(RED "[DEBUG]%d process terminated first!\n" RESET, data.dead_idx);
+	get_die_phil(&data, &info);
 	philo_exit(&data);
 	return (0);
 }

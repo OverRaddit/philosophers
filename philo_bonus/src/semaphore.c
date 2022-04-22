@@ -6,7 +6,7 @@
 /*   By: gshim <gshim@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/21 11:02:23 by gshim             #+#    #+#             */
-/*   Updated: 2022/04/21 15:16:49 by gshim            ###   ########.fr       */
+/*   Updated: 2022/04/22 21:33:56 by gshim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,8 @@
 bool	semaphore(sem_t **sem, char *filename, size_t size)
 {
 	sem_unlink(filename);
-	*sem = sem_open(filename, O_CREAT, 0644, size);	// 왜 0644?
+	*sem = sem_open(filename, O_CREAT, 0644, size);
 	if (*sem == SEM_FAILED)
 		return (false);
-		//return (true);
-	//return (false);
 	return (true);
 }
