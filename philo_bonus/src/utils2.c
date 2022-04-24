@@ -6,7 +6,7 @@
 /*   By: gshim <gshim@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/12 14:21:30 by gshim             #+#    #+#             */
-/*   Updated: 2022/04/22 11:11:12 by gshim            ###   ########.fr       */
+/*   Updated: 2022/04/24 13:05:59 by gshim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,6 @@ void	gsleep(size_t usec)
 	{
 		if (relative_time(start) >= usec)
 			break ;
-		usleep(100);
+		usleep(10);
 	}
 }

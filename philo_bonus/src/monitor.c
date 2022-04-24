@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   monitor.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gshim <gshim@student.42.fr>                +#+  +:+       +#+        */
+/*   By: gshim <gshim@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/13 16:21:45 by gshim             #+#    #+#             */
-/*   Updated: 2022/04/22 21:28:16 by gshim            ###   ########.fr       */
+/*   Updated: 2022/04/24 13:03:13 by gshim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,8 +37,9 @@ void	*phil_monitoring(void *d)
 		{
 			sem_post(p->full);
 			while (1)
-				usleep(1000);
+				usleep(1000 * 1000);
 		}
+		gsleep(500);
 	}
 }
 
