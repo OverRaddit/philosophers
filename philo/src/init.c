@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gshim <gshim@student.42seoul.kr>           +#+  +:+       +#+        */
+/*   By: gshim <gshim@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/08 22:22:31 by gshim             #+#    #+#             */
-/*   Updated: 2022/04/21 10:37:34 by gshim            ###   ########.fr       */
+/*   Updated: 2022/04/25 16:42:43 by gshim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,8 @@ bool	get_info(int argc, char *argv[], t_info *info)
 	else
 		info->phil_min_eat = -1;
 	if (info->phil_num <= 0 || info->phil_life <= 0 || info->phil_eat_time <= 0
-		|| info->phil_slp_time <= 0 || ((argc == 6) && (info->phil_min_eat <= 0)))
+		|| info->phil_slp_time <= 0
+		|| ((argc == 6) && (info->phil_min_eat <= 0)))
 		return (false);
 	return (true);
 }

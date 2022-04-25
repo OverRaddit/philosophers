@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   thread.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gshim <gshim@student.42seoul.kr>           +#+  +:+       +#+        */
+/*   By: gshim <gshim@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/11 19:34:21 by gshim             #+#    #+#             */
-/*   Updated: 2022/04/24 13:05:59 by gshim            ###   ########.fr       */
+/*   Updated: 2022/04/25 16:58:32 by gshim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,8 +46,6 @@ void	*t_function(void *pinfo)
 	t_personal_info	*d;
 
 	d = (t_personal_info *)pinfo;
-	if (d->idx % 2 == 1)
-		gsleep(100);
 	while (1)
 	{
 		thread_pick(d);

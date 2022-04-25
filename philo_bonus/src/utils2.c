@@ -3,20 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   utils2.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gshim <gshim@student.42seoul.kr>           +#+  +:+       +#+        */
+/*   By: gshim <gshim@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/12 14:21:30 by gshim             #+#    #+#             */
-/*   Updated: 2022/04/24 13:05:59 by gshim            ###   ########.fr       */
+/*   Updated: 2022/04/25 16:50:48 by gshim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../philosophers.h"
 
-// 초 단위로 동작
-// =>
-// ms 단위로 동작
-
-// 현재 모든 시간은 usec단위로 반환됨! ms로 사용하려면 /1000을 해야함!
 size_t	get_time(void)
 {
 	struct timeval	current;
@@ -42,6 +37,6 @@ void	gsleep(size_t usec)
 	{
 		if (relative_time(start) >= usec)
 			break ;
-		usleep(10);
+		usleep(50);
 	}
 }

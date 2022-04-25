@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils2.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gshim <gshim@student.42seoul.kr>           +#+  +:+       +#+        */
+/*   By: gshim <gshim@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/12 14:21:30 by gshim             #+#    #+#             */
-/*   Updated: 2022/04/24 13:08:37 by gshim            ###   ########.fr       */
+/*   Updated: 2022/04/25 16:47:57 by gshim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,6 @@ void	gsleep(size_t usec)
 	{
 		if (relative_time(start) >= usec)
 			break ;
-		usleep(10);
+		usleep(100);
 	}
 }
