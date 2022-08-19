@@ -6,7 +6,7 @@
 /*   By: gshim <gshim@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/12 14:21:30 by gshim             #+#    #+#             */
-/*   Updated: 2022/04/25 16:50:48 by gshim            ###   ########.fr       */
+/*   Updated: 2022/08/19 18:57:04 by gshim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,9 @@ void	gsleep(size_t usec)
 	size_t	start;
 
 	start = get_time();
+	// usleep
+	if (usec >= 5 * 1000)
+		usleep(usec - 5 * 1000);
 	while (1)
 	{
 		if (relative_time(start) >= usec)
